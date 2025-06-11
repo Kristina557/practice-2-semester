@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайдер изображений</title>
+    <style>
+        /* Основные стили */
+        .slider {
+            width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide {
+            min-width: 100%;
+        }
+        .button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .counter {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider">
+    <div class="slides">
+        <img class="slide" src="image1.jpg" alt="Image 1">
+        <img class="slide" src="image2.jpg" alt="Image 2">
+        <img class="slide" src="image3.jpg" alt="Image 3">
+    </div>
+    <button class="button prev">Назад</button>
+    <button class="button next">Вперед</button>
+    <div class="counter">Изображение 1 из 3</div>
+</div>
+
+<script>
+    const slides = document.querySelector('.slides');
+    const slideImages = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    const counter = document.querySelector('.counter');
+    
+    let currentIndex = 0;
+
+    function updateSlider() {
+        slides.style.transform = translateX(-${currentIndex * 100}%);
+        counter.textContent = Изображение ${currentIndex + 1} из ${slideImages.length};
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : slideImages.length - 1;
+        updateSlider();
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex < slideImages.length - 1) ? currentIndex + 1 : 0;
+        updateSlider();
+    });
+</script>
+
+</body>
+</html>
+
